@@ -12,7 +12,7 @@ internal class WorkWithDelegates
     {
         // Predicate
         //Point[] All = Array.FindAll(points, predicate);
-        Point[] All = Array.FindAll(points, x => x.X * x.Y > 50000);
+        Point[] All = Array.FindAll(points, static x => x.X * x.Y > 50000); // the static is not necesary but prevents unintentional memory allocation -> micro-optimization
 
         foreach (var item in All)
         {
@@ -22,7 +22,7 @@ internal class WorkWithDelegates
         // Func
         int d = 0;
 
-        d = Calculate(2, 2, (x, y) => x + y);
+        d = Calculate(2, 2, static (x, y) => x + y); // the static is not necesary
         Console.WriteLine(d);
 
 
@@ -50,19 +50,19 @@ internal class WorkWithDelegates
         return op(x, y);
     }
 
-    int Add(int x, int y)
+    static int Add(int x, int y)
     {
         Console.WriteLine("Fun ++");
         return x + y;
     }
 
-    int Subtract(int x, int y)
+    static int Subtract(int x, int y)
     {
         Console.WriteLine("Fun --");
         return x - y;
     }
 
-    private static bool FindPoints(Point obj)
+    static bool FindPoints(Point obj)
     {
         return obj.X * obj.Y > 100000;
     }
